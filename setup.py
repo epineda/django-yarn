@@ -10,12 +10,12 @@ except ImportError:
     requirements = ['ordereddict']
 
 setup(
-    name='django-npm',
+    name='django-yarn',
     version='1.0.0',
-    description='A django staticfiles finder that uses npm',
-    url='https://github.com/kevin1024/django-npm',
-    author='Kevin McCarthy',
-    author_email='me@kevinmccarthy.org',
+    description='A django staticfiles finder that uses yarn. Based on django-npm from Kevin McCarthy https://github.com/kevin1024/django-npm.',
+    url='https://github.com/epineda/django-yarn',
+    author='Edgard Pineda',
+    author_email='edgard.pineda@gmail.com',
     license='MIT',
     classifiers=[
         'Development Status :: 3 - Alpha',
@@ -31,7 +31,7 @@ setup(
         'Programming Language :: Python :: 3.4',
     ],
 
-    keywords='django npm staticfiles',
+    keywords='django yarn npm staticfiles',
     packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
     install_requires=requirements,
     extras_require={

@@ -12,9 +12,9 @@ except ImportError:
     from ordereddict import OrderedDict
 
 
-def npm_install():
-    npm_executable_path = getattr(settings, 'NPM_EXECUTABLE_PATH', 'npm')
-    command = [npm_executable_path, 'install', '--prefix=' + get_npm_root_path()]
+def yarn_add():
+    yarn_executable_path = getattr(settings, 'YARN_EXECUTABLE_PATH', 'yarn')
+    command = [yarn_executable_path, 'add', '--prefix=' + get_yarn_root_path()]
     proc = subprocess.Popen(
         command,
         env={'PATH': os.environ.get('PATH')},
@@ -22,8 +22,8 @@ def npm_install():
     proc.wait()
 
 
-def get_npm_root_path():
-    return getattr(settings, 'NPM_ROOT_PATH', '.')
+def get_yarn_root_path():
+    return getattr(settings, 'YARN_ROOT_PATH', '.')
 
 
 def flatten_patterns(patterns):
@@ -65,14 +65,14 @@ def get_files(storage, match_patterns='*', ignore_patterns=None, location=''):
                 yield fn
 
 
-class NpmFinder(FileSystemFinder):
+class YarnFinder(FileSystemFinder):
     def __init__(self, apps=None, *args, **kwargs):
-        self.node_modules_path = get_npm_root_path()
-        self.destination = getattr(settings, 'NPM_STATIC_FILES_PREFIX', '')
-        self.cache_enabled = getattr(settings, 'NPM_FINDER_USE_CACHE', True)
+        self.node_modules_path = get_yarn_root_path()
+        self.destination = getattr(settings, 'YARN_STATIC_FILES_PREFIX', '')
+        self.cache_enabled = getattr(settings, 'YARN_FINDER_USE_CACHE', True)
         self.cached_list = None
 
-        self.match_patterns = flatten_patterns(getattr(settings, 'NPM_FILE_PATTERNS', None)) or ['*']
+        self.match_patterns = flatten_patterns(getattr(settings, 'YARN_FILE_PATTERNS', None)) or ['*']
         self.locations = [(self.destination, os.path.join(self.node_modules_path, 'node_modules'))]
         self.storages = OrderedDict()
 
@@ -84,7 +84,7 @@ class NpmFinder(FileSystemFinder):
         relpath = os.path.relpath(path, self.destination)
         if not django_utils.matches_patterns(relpath, self.match_patterns):
             return []
-        return super(NpmFinder, self).find(path, all=all)
+        return super(YarnFinder, self).find(path, all=all)
 
     def list(self, ignore_patterns=None):  # TODO should be configurable, add setting
         """List all files in all locations."""
