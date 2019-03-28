@@ -1,15 +1,15 @@
 # django-yarn
 
-Want to use npm/yarn modules in your django project without vendoring them? django-yarn serves as a wrapper around the yarn command-line program as well as a staticfiles finder.
+Want to use yarn/yarn modules in your django project without vendoring them? django-yarn serves as a wrapper around the yarn command-line program as well as a staticfiles finder.
 
 ## Installation
 
 1. `$ pip install django-yarn`
-2. Install npm, then install yarn (`npm install -g yarn`). If you use a private registry, make sure your `.yarnrc` is set up to connect to it
+2. Install yarn, then install yarn (`yarn install -g yarn`). If you use a private registry, make sure your `.yarnrc` is set up to connect to it
 3. Have a `package.json` at the root of your project, listing your dependencies
 4. Add `yarn.finders.YarnFinder` to `STATICFILES_FINDERS`
 5. Configure your `settings.py`
-6. `$ yarn add` with the command line, or with Python: `from yarn.finder import yarn_add; yarn_add()`
+6. `$ yarn add` with the command line, or with Python: `from yarn.finders import yarn_add; yarn_add()`
 7. `$ ./manage.py collectstatic` will copy all selected node_modules files into your `STATIC_ROOT`.
 
 ## Configuration
