@@ -5,7 +5,7 @@ Want to use yarn/yarn modules in your django project without vendoring them? dja
 ## Installation
 
 1. `$ pip install django-yarn`
-2. Install yarn, then install yarn (`yarn install -g yarn`). If you use a private registry, make sure your `.yarnrc` is set up to connect to it
+2. Install yarn, then install yarn (`npm install -g yarn`). If you use a private registry, make sure your `.yarnrc` is set up to connect to it
 3. Have a `package.json` at the root of your project, listing your dependencies
 4. Add `yarn.finders.YarnFinder` to `STATICFILES_FINDERS`
 5. Configure your `settings.py`
