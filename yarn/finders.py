@@ -46,6 +46,9 @@ def get_files(storage, match_patterns='*', ignore_patterns=None, location=''):
     if match_patterns is None:
         match_patterns = []
 
+    if not os.path.isdir(location):
+        return
+
     directories, files = storage.listdir(location)
     for fn in files:
         if django_utils.matches_patterns(fn, ignore_patterns):
