@@ -47,7 +47,12 @@ def test_finder_with_patterns_in_subdirectory(yarn_dir):
         f = YarnFinder()
         assert f.find('lib/mocha/mocha.js')
 
-def test_no_matching_paths_returns_empty_list(yarn_dir):
+def test_finder_with_patterns_in_directory_component(npm_dir):
+    with override_settings(YARN_STATIC_FILES_PREFIX='lib', YARN_FILE_PATTERNS={'mocha': ['*/*js']}):
+        f = YarnFinder()
+        assert f.find('lib/mocha/lib/test.js')
+
+def test_no_matching_paths_returns_empty_list(npm_dir):
     with override_settings(YARN_FILE_PATTERNS={'foo': ['bar']}):
         f = YarnFinder()
         assert f.find('mocha/mocha.js') == []
