@@ -58,7 +58,7 @@ def get_files(storage, match_patterns='*', ignore_patterns=None, location=''):
     if match_patterns is None:
         match_patterns = []
 
-    if not os.path.isdir(location):
+    if not os.path.isdir(storage.path(location)):
         return
 
     directories, files = storage.listdir(location)
